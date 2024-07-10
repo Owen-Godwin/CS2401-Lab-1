@@ -1,7 +1,7 @@
 
 /**
  *   @file: numbers.h
- * @author: <Enter your name here>
+ * @author: Owen Godwin
  *   @date: June 13, 2021
  *  @brief: A little class that holds a dynamic array of numbers
  */
@@ -20,11 +20,11 @@ class Numbers {
     void display(ostream& outs);
     unsigned long* reveal_address() const;
     // This is added after first three questions answered:
-    // void operator = (const Numbers& other);
+    void operator = (const Numbers& other);
     // This is used in Part 2 and would normally not be in a container	unsigned
     // long * reveal_address()const;
     // This is a function that you add in Part 2
-    //~Numbers();
+    ~Numbers();
    private:
     unsigned long* data;
     size_t used;
@@ -36,6 +36,18 @@ Numbers::Numbers() {
     used = 0;
     capacity = 5;
     byte_count += 5 * sizeof(unsigned long);
+}
+
+// Destructor
+Numbers::~Numbers() {
+    // Print message
+    cout << "Destructor called. Releasing resources." << endl;
+
+    // Correct delete command
+    delete[] data;
+
+    // Update byte_count
+    byte_count -= capacity * sizeof(unsigned long);
 }
 
 void Numbers::add(unsigned long item) {
@@ -65,8 +77,26 @@ void Numbers::display(ostream& outs) {
 unsigned long* Numbers::reveal_address() const { return data; }
 
 // You will need to write the implementation of this overloaded operator
-/*
-void Numbers::operator = (const Numbers& other){
 
+void Numbers::operator = (const Numbers& other){
+    // Check for self-assignment
+    if (this == &other) {
+        return;
+    }
+
+    // Delete the existing array
+    delete[] data;
+
+    // Create a new array the same size as the one being copied from
+    data = new unsigned long[other.capacity];
+
+    // Copy the values for used and capacity
+    used = other.used;
+    capacity = other.capacity;
+
+    // Copy all the data from the other array into the new one
+    std::copy(other.data, other.data + other.used, data);
+
+    // Update byte_count
+    byte_count += capacity * sizeof(unsigned long);
 }
-*/

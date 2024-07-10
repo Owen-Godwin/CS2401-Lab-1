@@ -1,6 +1,6 @@
 /**
  *   @file: lab1main.cc
- * @author: <Enter your name here>
+ * @author: Owen Godwin
  *   @date: June 13, 2021
  *  @brief: This is the main for Lab Assignment 1.
         You will be creating the Numbers class that it uses.
@@ -40,8 +40,9 @@ int main() {
     n1.display(cout);
 	cout << endl;
 
+
 	// Uncomment the following to do Part 2
-	/*
+	
     unsigned long start, stop, running;
 
     start = time(NULL);
@@ -76,7 +77,7 @@ int main() {
     running = (stop - start)/60;
 
     cout<<endl<<"Running took "<<running<<" minutes.\n";
-    */
+    
     cout << "\nTotal bytes allocated = " << byte_count << endl;
 	
     return 0;
